@@ -9,19 +9,20 @@ import Courses from "./pages/Courses.jsx";
 import CourseDetail from "./pages/CourseDetail.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
+import ContentHub from "./pages/ContentHub.jsx";
+import Assignments from "./pages/Assignments.jsx";
 
 // Teacher Pages
 import Dashboard from "./teacherpages/Dashboard.jsx";
 import ManageCourses from "./teacherpages/ManageCourses.jsx";
 import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
-import Assignments from "./teacherpages/Assignments.jsx";
+import Assignments from "./teacherpages/Assignment.jsx";
 import Grading from "./teacherpages/Grading.jsx";
 //import Analytics from "./teacherpages/Analytics.jsx";
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
 import "./styles/global.css";
-import ContentHub from "./pages/ContentHub.jsx";
-import Assignments from "./pages/Assignments.jsx";
+
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
@@ -34,14 +35,11 @@ function TeacherContent() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/manage-courses" element={<ManageCourses />} />
           <Route path="/study-material" element={<StudyMaterial />} />
-          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/assignments" element={<Assignment />} />
           <Route path="/grading" element={<Grading />} />
           {/* <Route path="/teacher/analytics" element={<Analytics />} /> */}
           <Route path="/profile" element={<TeacherProfile />} />
-          <Route
-            path="*"
-            element={<Navigate to="/teacher/" replace />}
-          />
+          <Route path="*" element={<Navigate to="/teacher/" replace />} />
         </Routes>
       </main>
     </div>
