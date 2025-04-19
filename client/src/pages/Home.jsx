@@ -1,3 +1,4 @@
+// Home.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -183,6 +184,7 @@ const Home = () => {
       </div>
 
       <div className="dashboard-grid">
+        {/* Row 1: Attendance, Assignments, Performance */}
         <motion.div
           className={`chart-card small-card ${
             expandedCard === "attendance" ? "expanded" : ""
@@ -253,6 +255,30 @@ const Home = () => {
           />
         </motion.div>
 
+        {/* Row 2: Notifications + Courses */}
+        <motion.div
+          className="chart-card notifications small-card"
+          variants={cardVariants}
+          whileHover={{ scale: 1.01 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h2>Notifications</h2>
+          <div className="notification-list">
+            {profileData.notifications.map((notification, index) => (
+              <motion.div
+                key={index}
+                className={`notification-item ${notification.type}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <FaBell className="notification-icon" />
+                <p>{notification.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         <motion.div
           className="chart-card course-progress wide-card"
           variants={cardVariants}
@@ -285,29 +311,7 @@ const Home = () => {
           </div>
         </motion.div>
 
-        <motion.div
-          className="chart-card notifications small-card"
-          variants={cardVariants}
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.3 }}
-        >
-          <h2>Notifications</h2>
-          <div className="notification-list">
-            {profileData.notifications.map((notification, index) => (
-              <motion.div
-                key={index}
-                className={`notification-item ${notification.type}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <FaBell className="notification-icon" />
-                <p>{notification.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
+        {/* Row 3: Leaderboard */}
         <motion.div
           className={`chart-card leaderboard tall-card ${
             expandedCard === "leaderboard" ? "expanded" : ""

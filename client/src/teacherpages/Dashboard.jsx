@@ -7,12 +7,16 @@ import {
   FaChartLine,
   FaMoon,
   FaSun,
+  FaBell,
+  FaTrophy,
+  FaCalendar,
+  FaCheckCircle,
+  FaClock,
 } from "react-icons/fa";
 import "../teacherstyles/Dashboard.css";
 
-const TeacherDashboard = () => {
+const Dashboard = ({ role }) => {
   const { isDarkMode, toggleTheme } = useTheme();
-
   const dateString = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -20,13 +24,27 @@ const TeacherDashboard = () => {
     day: "numeric",
   });
 
-  const upcomingClasses = [
+  const isStudent = role === "student";
+
+  const studentSessions = [
+    { time: "10:00 AM", title: "Public Speaking Basics", duration: "45 min" },
+    { time: "2:30 PM", title: "Voice Modulation", duration: "60 min" },
+    { time: "4:00 PM", title: "Presentation Skills", duration: "45 min" },
+  ];
+
+  const studentProgress = [
+    { course: "Public Speaking", progress: 75 },
+    { course: "Business Communication", progress: 60 },
+    { course: "Interview Skills", progress: 45 },
+  ];
+
+  const teacherClasses = [
     { time: "10:00 AM", subject: "Web Development", students: 25 },
     { time: "11:30 AM", subject: "Database Design", students: 22 },
     { time: "2:00 PM", subject: "React Basics", students: 28 },
   ];
 
-  const recentSubmissions = [
+  const submissions = [
     {
       student: "John Doe",
       assignment: "React Project",
@@ -51,27 +69,30 @@ const TeacherDashboard = () => {
     {
       title: "Project Deadline Extended",
       date: "Today",
-      content:
-        "The deadline for React project submission has been extended to next Friday.",
+      content: "Deadline moved to next Friday.",
     },
     {
       title: "New Course Material",
       date: "Yesterday",
-      content: "New materials for Database Design course have been uploaded.",
+      content: "New database materials uploaded.",
     },
     {
       title: "Workshop Schedule",
       date: "2 days ago",
-      content: "Web Development workshop scheduled for next week.",
+      content: "Web workshop next week.",
     },
   ];
 
   return (
     <div className={`dashboard-container ${isDarkMode ? "dark-mode" : ""}`}>
-      <div className="welcome-section">
-        <div className="welcome-text">
-          <h1>Welcome Back, Dr. Sarah!</h1>
-          <p>Here's what's happening with your courses today</p>
+      <div className="dashboard-header">
+        <div className="logo-section">
+          <h1>Watch & Learn</h1>
+          <p>
+            {isStudent
+              ? "Your Learning Dashboard"
+              : "Here's your teaching overview"}
+          </p>
         </div>
         <div className="header-actions">
           <button className="theme-toggle" onClick={toggleTheme}>
@@ -81,101 +102,179 @@ const TeacherDashboard = () => {
               <FaMoon className="theme-icon" />
             )}
           </button>
-          <div className="date-time">
-            <p>{dateString}</p>
+          <div className="profile-section">
+            {isStudent ? (
+              <>
+                <div className="notification-badge">
+                  <FaBell />
+                  <span className="badge">3</span>
+                </div>
+                <img
+                  src="/profile-image.jpg"
+                  alt="Profile"
+                  className="profile-image"
+                />
+                <div className="profile-details">
+                  <h3>Madhura Lolayekar</h3>
+                  <p>Student</p>
+                </div>
+              </>
+            ) : (
+              <div className="date-time">
+                <p>{dateString}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
-      <div className="stats-grid">
-        <StatCard
-          icon={<FaGraduationCap />}
-          title="Total Students"
-          number="156"
-          trend="+12% from last month"
-          trendClass="positive"
-        />
-        <StatCard
-          icon={<FaBook />}
-          title="Active Courses"
-          number="8"
-          trend="+2 new courses"
-          trendClass="positive"
-        />
-        <StatCard
-          icon={<FaClipboardList />}
-          title="Assignments"
-          number="24"
-          trend="5 pending review"
-          trendClass="neutral"
-        />
-        <StatCard
-          icon={<FaChartLine />}
-          title="Average Score"
-          number="85%"
-          trend="+5% improvement"
-          trendClass="positive"
-        />
-      </div>
-
-      <div className="dashboard-grid">
-        <DashboardCard title="Upcoming Classes">
-          <div className="class-list">
-            {upcomingClasses.map((cls, idx) => (
-              <div key={idx} className="class-item">
-                <div className="class-time">{cls.time}</div>
-                <div className="class-details">
-                  <h4>{cls.subject}</h4>
-                  <p>{cls.students} students enrolled</p>
-                </div>
-                <button className="start-class-btn">Start</button>
-              </div>
-            ))}
+      {isStudent ? (
+        <>
+          <div className="welcome-banner">
+            <div className="welcome-text">
+              <h2>Speak with Confidence</h2>
+              <p>
+                Master your communication skills with our interactive courses
+              </p>
+            </div>
+            <div className="accent-shape"></div>
           </div>
-        </DashboardCard>
 
-        <DashboardCard title="Recent Submissions">
-          <div className="submission-list">
-            {recentSubmissions.map((sub, idx) => (
-              <div key={idx} className="submission-item">
-                <div className="submission-info">
-                  <h4>{sub.student}</h4>
-                  <p>{sub.assignment}</p>
-                  <span className="submission-time">{sub.time}</span>
-                </div>
-                <span className={`submission-status ${sub.status}`}>
-                  {sub.status}
-                </span>
-              </div>
-            ))}
+          <div className="stats-overview">
+            <StatCard icon={<FaTrophy />} number="23" label="Achievements" />
+            <StatCard icon={<FaBook />} number="38" label="Courses" />
           </div>
-        </DashboardCard>
 
-        <DashboardCard title="Recent Announcements">
-          <div className="announcement-list">
-            {announcements.map((ann, idx) => (
-              <div key={idx} className="announcement-item">
-                <div className="announcement-header">
-                  <h4>{ann.title}</h4>
-                  <span className="announcement-date">{ann.date}</span>
+          <div className="dashboard-grid">
+            <DashboardCard
+              title={
+                <>
+                  <FaCalendar /> Upcoming Sessions
+                </>
+              }
+            >
+              {studentSessions.map((s, i) => (
+                <div key={i} className="session-item">
+                  <div className="session-time">
+                    <FaClock />
+                    <span>{s.time}</span>
+                  </div>
+                  <div className="session-info">
+                    <h4>{s.title}</h4>
+                    <p>{s.duration}</p>
+                  </div>
+                  <button className="join-btn">Join</button>
                 </div>
-                <p>{ann.content}</p>
-              </div>
-            ))}
+              ))}
+            </DashboardCard>
+
+            <DashboardCard
+              title={
+                <>
+                  <FaCheckCircle /> Course Progress
+                </>
+              }
+            >
+              {studentProgress.map((c, i) => (
+                <div key={i} className="progress-item">
+                  <div className="progress-header">
+                    <h4>{c.course}</h4>
+                    <span>{c.progress}%</span>
+                  </div>
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${c.progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </DashboardCard>
           </div>
-        </DashboardCard>
-      </div>
+        </>
+      ) : (
+        <>
+          <div className="stats-grid">
+            <StatCard
+              icon={<FaGraduationCap />}
+              number="156"
+              label="Total Students"
+              trend="+12%"
+            />
+            <StatCard
+              icon={<FaBook />}
+              number="8"
+              label="Active Courses"
+              trend="+2 new"
+            />
+            <StatCard
+              icon={<FaClipboardList />}
+              number="24"
+              label="Assignments"
+              trend="5 pending"
+            />
+            <StatCard
+              icon={<FaChartLine />}
+              number="85%"
+              label="Average Score"
+              trend="+5%"
+            />
+          </div>
+
+          <div className="dashboard-grid">
+            <DashboardCard title="Upcoming Classes">
+              {teacherClasses.map((cls, i) => (
+                <div key={i} className="class-item">
+                  <div className="class-time">{cls.time}</div>
+                  <div className="class-details">
+                    <h4>{cls.subject}</h4>
+                    <p>{cls.students} students enrolled</p>
+                  </div>
+                  <button className="start-class-btn">Start</button>
+                </div>
+              ))}
+            </DashboardCard>
+
+            <DashboardCard title="Recent Submissions">
+              {submissions.map((sub, i) => (
+                <div key={i} className="submission-item">
+                  <div className="submission-info">
+                    <h4>{sub.student}</h4>
+                    <p>{sub.assignment}</p>
+                    <span className="submission-time">{sub.time}</span>
+                  </div>
+                  <span className={`submission-status ${sub.status}`}>
+                    {sub.status}
+                  </span>
+                </div>
+              ))}
+            </DashboardCard>
+
+            <DashboardCard title="Recent Announcements">
+              {announcements.map((a, i) => (
+                <div key={i} className="announcement-item">
+                  <div className="announcement-header">
+                    <h4>{a.title}</h4>
+                    <span className="announcement-date">{a.date}</span>
+                  </div>
+                  <p>{a.content}</p>
+                </div>
+              ))}
+            </DashboardCard>
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
-const StatCard = ({ icon, title, number, trend, trendClass }) => (
+const StatCard = ({ icon, number, label, trend }) => (
   <div className="stat-card">
-    <div className="stat-icon">{icon}</div>
-    <div className="stat-info">
-      <h3>{title}</h3>
-      <p className="stat-number">{number}</p>
-      <span className={`stat-trend ${trendClass}`}>{trend}</span>
+    <div className="stat-content">
+      <div className="stat-icon">{icon}</div>
+      <h2 className="stat-number">{number}</h2>
+      <p className="stat-label">{label}</p>
+      {trend && <span className="stat-trend">{trend}</span>}
     </div>
   </div>
 );
@@ -187,4 +286,4 @@ const DashboardCard = ({ title, children }) => (
   </div>
 );
 
-export default TeacherDashboard;
+export default Dashboard;

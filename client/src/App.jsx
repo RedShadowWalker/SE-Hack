@@ -16,13 +16,12 @@ import Assignments from "./pages/Assignments.jsx";
 import Dashboard from "./teacherpages/Dashboard.jsx";
 import ManageCourses from "./teacherpages/ManageCourses.jsx";
 import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
-import Assignments from "./teacherpages/Assignment.jsx";
+import Assignment from "./teacherpages/Assignment.jsx";
 import Grading from "./teacherpages/Grading.jsx";
-//import Analytics from "./teacherpages/Analytics.jsx";
+
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
-import "./styles/global.css";
-
+// import "./styles/global.css";
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
@@ -77,12 +76,16 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <Routes>
-        <Route path="/teacher/*" element={<TeacherContent />} />
-        <Route path="/*" element={<StudentContent />} />
-      </Routes>
-    </ThemeProvider>
+    // <ThemeProvider>
+    //   {/* <Routes>
+    //     <Route path="/teacher/*" element={<TeacherContent />} />
+    //     <Route path="/*" element={<StudentContent />} />
+    //   </Routes> */}
+
+    // </ThemeProvider>
+    <div className="h-screen w-full bg-black">
+      <div className="text-3xl font-bold underline">Hello!</div>
+    </div>
   );
 }
 
