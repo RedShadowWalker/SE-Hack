@@ -23,6 +23,19 @@ const Navbar = () => {
         >
           Courses
         </Link>
+        {/* New navigation options */}
+        <Link
+          to="/contenthub"
+          className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+        >
+          ContentHub
+        </Link>
+        <Link
+          to="/assignments"
+          className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+        >
+          Assignments
+        </Link>
         <Link
           to="/quiz"
           className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}

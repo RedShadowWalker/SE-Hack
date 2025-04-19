@@ -20,6 +20,8 @@ import Grading from "./teacherpages/Grading.jsx";
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
 import "./styles/global.css";
+import ContentHub from "./pages/ContentHub.jsx";
+import Assignments from "./pages/Assignments.jsx";
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
@@ -59,6 +61,9 @@ function StudentContent() {
           <Route path="/course/:slug" element={<CourseDetail />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/account" element={<Account />} />
+          {/* New routes */}
+          <Route path="/contenthub" element={<ContentHub />} />
+          <Route path="/assignments" element={<Assignments />} />
         </Routes>
       </main>
     </div>
