@@ -32,7 +32,6 @@ const Calendar = () => {
   );
 };
 
-
 const Home = () => {
   return (
     <div className="home">
