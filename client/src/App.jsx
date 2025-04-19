@@ -29,13 +29,13 @@ function TeacherContent() {
       <TeacherNavbar />
       <main className={isDarkMode ? "dark-mode" : ""}>
         <Routes>
-          <Route path="/teacher/" element={<Dashboard />} />
-          <Route path="/teacher/manage-courses" element={<ManageCourses />} />
-          <Route path="/teacher/study-material" element={<StudyMaterial />} />
-          <Route path="/teacher/assignments" element={<Assignments />} />
-          <Route path="/teacher/grading" element={<Grading />} />
-          <Route path="/teacher/analytics" element={<Analytics />} />
-          <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/manage-courses" element={<ManageCourses />} />
+          <Route path="/study-material" element={<StudyMaterial />} />
+          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/grading" element={<Grading />} />
+          {/* <Route path="/teacher/analytics" element={<Analytics />} /> */}
+          <Route path="/profile" element={<TeacherProfile />} />
           <Route
             path="*"
             element={<Navigate to="/teacher/" replace />}

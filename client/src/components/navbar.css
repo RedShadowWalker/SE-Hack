@@ -3,9 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: white;
+  background-color: #c7e0fa; /* Tropical Blue */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar.dark-mode {
@@ -16,13 +17,13 @@
 .nav-brand a {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1d82be;
+  color: #1d82be; /* Eastern Blue */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nav-brand a.dark-mode {
-  color: #3498db;
+  color: #c7e0fa; /* Tropical Blue for contrast in dark mode */
 }
 
 .nav-links {
@@ -32,22 +33,22 @@
 }
 
 .nav-link {
-  color: #1d82be;
+  color: #1d82be; /* Eastern Blue */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #f8b530;
+  color: #f8bb33; /* Saffron */
 }
 
 .nav-link.dark-mode {
-  color: #e7ecfa;
+  color: #c7e0fa; /* Tropical Blue */
 }
 
 .nav-link.dark-mode:hover {
-  color: #f8b530;
+  color: #f8bb33; /* Saffron */
 }
 
 .theme-toggle {
@@ -59,14 +60,16 @@
   border-radius: 50%;
   transition: transform 0.3s ease;
   margin-left: 1rem;
+  color: #1d82be; /* Eastern Blue */
 }
 
 .theme-toggle:hover {
   transform: scale(1.1);
+  color: #f8bb33; /* Saffron */
 }
 
 .theme-toggle.dark-mode {
-  color: #e7ecfa;
+  color: #c7e0fa; /* Tropical Blue */
 }
 
 @media (max-width: 768px) {
