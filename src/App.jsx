@@ -1,20 +1,25 @@
+import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/navbar";
 import Home from "./pages/Home";
-import Account from "./pages/Account";
 import Courses from "./pages/Courses";
+import Account from "./pages/Account";
 import Quizes from "./pages/Quizes";
 import "./App.css";
 
 function App() {
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/quizzes" element={<Quizes />} />
-      </Routes>
-    </div>
+    <>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/quizes" element={<Quizes />} />
+        </Routes>
+      </main>
+    </>
   );
 }
 

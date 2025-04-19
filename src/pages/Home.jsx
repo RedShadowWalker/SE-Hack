@@ -1,5 +1,5 @@
-import React from 'react';
-import './Calendar.css';  // We'll put the styles in a separate CSS file
+import React from "react";
+import "../styles/Calendar.css"; // We'll put the styles in a separate CSS file
 
 const Calendar = () => {
   return (
@@ -31,7 +31,6 @@ const Calendar = () => {
     </div>
   );
 };
-
 
 const Home = () => {
   return (
