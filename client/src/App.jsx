@@ -9,19 +9,21 @@ import Courses from "./pages/Courses.jsx";
 import CourseDetail from "./pages/CourseDetail.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
-import ContentHub from "./pages/ContentHub.jsx";
-import Assignments from "./pages/Assignments.jsx";
+
 
 // Teacher Pages
 import Dashboard from "./teacherpages/Dashboard.jsx";
 import ManageCourses from "./teacherpages/ManageCourses.jsx";
 import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
-import Assignment from "./teacherpages/Assignment.jsx";
+import Assignments from "./teacherpages/Assignments.jsx";
 import Grading from "./teacherpages/Grading.jsx";
-
+//import Analytics from "./teacherpages/Analytics.jsx";
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
-// import "./styles/global.css";
+import "./styles/global.css";
+
+import ContentHub from "./pages/ContentHub.jsx";
+import assignments from "./pages/Assignments.jsx";
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
@@ -31,6 +33,7 @@ function TeacherContent() {
       <TeacherNavbar />
       <main className={isDarkMode ? "dark-mode" : ""}>
         <Routes>
+
           <Route path="/" element={<Dashboard />} />
           <Route path="/manage-courses" element={<ManageCourses />} />
           <Route path="/study-material" element={<StudyMaterial />} />
@@ -39,6 +42,18 @@ function TeacherContent() {
           {/* <Route path="/teacher/analytics" element={<Analytics />} /> */}
           <Route path="/profile" element={<TeacherProfile />} />
           <Route path="*" element={<Navigate to="/teacher/" replace />} />
+          <Route path="/teacher/" element={<Dashboard />} />
+          <Route path="/teacher/manage-courses" element={<ManageCourses />} />
+          <Route path="/teacher/study-material" element={<StudyMaterial />} />
+          <Route path="/teacher/assignments" element={<Assignments />} />
+          <Route path="/teacher/grading" element={<Grading />} />
+          <Route path="/teacher/analytics" element={<Analytics />} />
+          <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route
+            path="*"
+            element={<Navigate to="/teacher/" replace />}
+          />
+
         </Routes>
       </main>
     </div>
@@ -76,6 +91,7 @@ function AppContent() {
 
 function App() {
   return (
+
     // <ThemeProvider>
     //   {/* <Routes>
     //     <Route path="/teacher/*" element={<TeacherContent />} />
@@ -86,6 +102,14 @@ function App() {
     <div className="h-screen w-full bg-black">
       <div className="text-3xl font-bold underline">Hello!</div>
     </div>
+
+//     <ThemeProvider>
+//       <Routes>
+//         <Route path="/teacher/*" element={<TeacherContent />} />
+//         <Route path="/*" element={<StudentContent />} />
+//       </Routes>
+//     </ThemeProvider>
+
   );
 }
 
