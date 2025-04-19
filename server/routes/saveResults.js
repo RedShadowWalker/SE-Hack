@@ -13,4 +13,5 @@ router.post("/save-results", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
+// This code defines an Express router that handles saving quiz results to a MongoDB database.
