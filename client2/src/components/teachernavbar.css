@@ -1,116 +1,256 @@
+/* Teacher Navbar CSS - Modern Educational Dashboard Style */
+
 .teacher-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background-color: var(--eastern-blue);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.8rem 2rem;
+  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
   z-index: 1000;
-}
-
-.nav-brand h1 {
-  color: white;
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.nav-link {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
   transition: all 0.3s ease;
 }
 
-.nav-link i {
-  font-size: 1.1rem;
+.teacher-navbar.dark-mode {
+  background: linear-gradient(to right, #243B55, #141E30);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.nav-link.active {
-  background-color: var(--saffron);
-  color: white;
-}
-
-.nav-profile {
-  position: relative;
+/* Brand area */
+.nav-brand {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.nav-brand h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
   cursor: pointer;
+  font-size: 1.2rem;
   padding: 0.5rem;
-  border-radius: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 1.2rem;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-grow: 1;
+  justify-content: center;
+  margin: 0 2rem;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 3px 3px 0 0;
+}
+
+.nav-link svg {
+  font-size: 1.1rem;
+}
+
+/* Profile section */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 24px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-profile:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .profile-image {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2px solid var(--saffron);
+  object-fit: cover;
+  border: 2px solid #fff;
 }
 
 .profile-name {
-  color: white;
+  font-weight: 500;
+  font-size: 0.95rem;
 }
 
+/* Dropdown menu */
 .profile-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 200px;
   margin-top: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
   padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: dropdown-appear 0.2s ease forwards;
+  transform-origin: top right;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .profile-dropdown a {
+  color: #444;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  color: var(--regent-gray);
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  gap: 0.8rem;
+  transition: all 0.2s ease;
 }
 
 .profile-dropdown a:hover {
-  background-color: var(--tropical-blue);
-  color: var(--eastern-blue);
+  background: #f5f5f5;
+  color: #3a7bd5;
+}
+
+.dark-mode .profile-dropdown {
+  background: #2a3542;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .profile-dropdown a {
+  color: #e0e0e0;
+}
+
+.dark-mode .profile-dropdown a:hover {
+  background: #374151;
+  color: #6ab3ff;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: 0.25rem;
+  }
+  
+  .nav-link {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 768px) {
   .teacher-navbar {
-    padding: 0 1rem;
+    flex-direction: column;
+    padding: 0.8rem 1rem;
   }
-
-  .nav-brand h1 {
-    font-size: 1.2rem;
+  
+  .nav-brand {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
   }
-
+  
   .nav-links {
-    display: none;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
+    margin: 0;
+    gap: 0.25rem;
   }
+  
+  .nav-link {
+    white-space: nowrap;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  
+  .nav-profile {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+  
+  .profile-dropdown {
+    right: 0;
+  }
+}
 
+@media (max-width: 480px) {
+  .nav-link svg {
+    font-size: 1rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  
   .profile-name {
     display: none;
   }

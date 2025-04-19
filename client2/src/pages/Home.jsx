@@ -1,6 +1,6 @@
-// Home.jsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -30,6 +30,7 @@ ChartJS.register(
 );
 
 const Home = () => {
+  const { isDarkMode } = useTheme();
   const [expandedCard, setExpandedCard] = useState(null);
 
   const profileData = {
@@ -37,7 +38,7 @@ const Home = () => {
     role: "Student",
     achievements: 23,
     courses: 38,
-    profileImage: "/path/to/your/profile-image.jpg",
+    profileImage: "/Madhu.jpg",
     notifications: [
       { id: 1, text: "Assignment due tomorrow", type: "urgent" },
       { id: 2, text: "New course material available", type: "info" },
@@ -132,59 +133,54 @@ const Home = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="dashboard-container"
+      className={`dashboard-container ${isDarkMode ? "dark-mode" : ""}`}
     >
+      {/* Header */}
       <div className="dashboard-header">
         <motion.h1
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="dashboard-title"
         >
           Dashboard
         </motion.h1>
-
         <motion.div
           className="profile-section"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
         >
+          <img
+            src={profileData.profileImage}
+            alt="Profile"
+            className="profile-image"
+          />
           <div className="profile-info">
-            <div className="profile-image-container">
-              <img
-                src={profileData.profileImage}
-                alt={profileData.name}
-                className="profile-image"
-              />
-              <div className="profile-details">
-                <h3>{profileData.name}</h3>
-                <p>{profileData.role}</p>
-              </div>
-            </div>
-
-            <div className="profile-stats-horizontal">
-              <div className="stat-item">
-                <FaTrophy className="stat-icon" />
-                <div>
-                  <h3>{profileData.achievements}</h3>
-                  <p>Achievements</p>
-                </div>
-              </div>
-              <div className="stat-item">
-                <FaUserGraduate className="stat-icon" />
-                <div>
-                  <h3>{profileData.courses}</h3>
-                  <p>Courses</p>
-                </div>
-              </div>
-            </div>
+            <h2>{profileData.name}</h2>
+            <p>{profileData.role}</p>
           </div>
         </motion.div>
       </div>
 
+      {/* Stats */}
+      <div className="stats-container">
+        <div className="stat-card achievements">
+          <FaTrophy className="stat-icon" />
+          <div className="stat-content">
+            <h3 className="stat-number">{profileData.achievements}</h3>
+            <p className="stat-label">Achievements</p>
+          </div>
+        </div>
+
+        <div className="stat-card courses">
+          <FaUserGraduate className="stat-icon" />
+          <div className="stat-content">
+            <h3 className="stat-number">{profileData.courses}</h3>
+            <p className="stat-label">Courses</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Chart Grid */}
       <div className="dashboard-grid">
-        {/* Row 1: Attendance, Assignments, Performance */}
         <motion.div
           className={`chart-card small-card ${
             expandedCard === "attendance" ? "expanded" : ""
@@ -196,16 +192,7 @@ const Home = () => {
           transition={{ duration: 0.3 }}
         >
           <h2>Attendance Overview</h2>
-          <Bar
-            data={attendanceData}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { labels: { usePointStyle: true, padding: 20 } },
-              },
-              scales: { y: { beginAtZero: true, max: 100 } },
-            }}
-          />
+          <Bar data={attendanceData} />
         </motion.div>
 
         <motion.div
@@ -220,15 +207,7 @@ const Home = () => {
         >
           <h2>Assignment Status</h2>
           <div className="pie-wrapper">
-            <Pie
-              data={assignmentData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: { position: "bottom", labels: { padding: 10 } },
-                },
-              }}
-            />
+            <Pie data={assignmentData} />
           </div>
         </motion.div>
 
@@ -243,57 +222,37 @@ const Home = () => {
           transition={{ duration: 0.3 }}
         >
           <h2>Performance Trends</h2>
-          <Line
-            data={improvementData}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { labels: { usePointStyle: true, padding: 20 } },
-              },
-              scales: { y: { beginAtZero: true, max: 100 } },
-            }}
-          />
+          <Line data={improvementData} />
         </motion.div>
 
-        {/* Row 2: Notifications + Courses */}
-        <motion.div
-          className="chart-card notifications small-card"
-          variants={cardVariants}
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.3 }}
-        >
+        <motion.div className="chart-card notifications small-card">
           <h2>Notifications</h2>
           <div className="notification-list">
-            {profileData.notifications.map((notification, index) => (
+            {profileData.notifications.map((n, i) => (
               <motion.div
-                key={index}
-                className={`notification-item ${notification.type}`}
+                key={i}
+                className={`notification-item ${n.type}`}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: i * 0.1 }}
               >
                 <FaBell className="notification-icon" />
-                <p>{notification.text}</p>
+                <p>{n.text}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        <motion.div
-          className="chart-card course-progress wide-card"
-          variants={cardVariants}
-          whileHover={{ scale: 1.01 }}
-          transition={{ duration: 0.3 }}
-        >
+        <motion.div className="chart-card course-progress wide-card">
           <h2>My Courses</h2>
           <div className="course-list">
-            {courseProgress.map((course, index) => (
+            {courseProgress.map((course, i) => (
               <motion.div
-                key={index}
+                key={i}
                 className="course-item"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: i * 0.1 }}
               >
                 <span className="course-icon">{course.icon}</span>
                 <div className="course-info">
@@ -311,7 +270,6 @@ const Home = () => {
           </div>
         </motion.div>
 
-        {/* Row 3: Leaderboard */}
         <motion.div
           className={`chart-card leaderboard tall-card ${
             expandedCard === "leaderboard" ? "expanded" : ""
@@ -324,13 +282,13 @@ const Home = () => {
         >
           <h2>Top Performers</h2>
           <div className="leaderboard-list">
-            {leaderboardData.map((student, index) => (
+            {leaderboardData.map((student, i) => (
               <motion.div
-                key={index}
+                key={i}
                 className="leaderboard-item"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: i * 0.1 }}
               >
                 <span className="avatar">{student.avatar}</span>
                 <span className="rank">#{student.rank}</span>
@@ -340,6 +298,21 @@ const Home = () => {
             ))}
           </div>
         </motion.div>
+      </div>
+
+      {/* Video Grid Section */}
+      <div className="video-grid">
+        {[1, 2, 3, 4].map((item) => (
+          <div key={item} className="video-card">
+            <div className="video-thumbnail">
+              <div className="play-button">
+                <span>Play Video</span>
+              </div>
+              <div className="video-duration">00:{30 + item}</div>
+            </div>
+            <h3>Class Title</h3>
+          </div>
+        ))}
       </div>
     </motion.div>
   );

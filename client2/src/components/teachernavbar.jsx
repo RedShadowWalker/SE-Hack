@@ -1,60 +1,88 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import './teachernavbar.css';
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import {
+  FaSun,
+  FaMoon,
+  FaHome,
+  FaBook,
+  FaFileAlt,
+  FaTasks,
+  FaCheckCircle,
+  FaChartLine,
+  FaUser,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import "./teachernavbar.css";
 
 const TeacherNavbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <nav className="teacher-navbar">
+    <nav className={`teacher-navbar ${isDarkMode ? "dark-mode" : ""}`}>
       <div className="nav-brand">
         <h1>Teacher Dashboard</h1>
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {isDarkMode ? (
+            <FaSun className="theme-icon" />
+          ) : (
+            <FaMoon className="theme-icon" />
+          )}
+        </button>
       </div>
 
       <div className="nav-links">
         <NavLink to="/teacher/dashboard" className="nav-link">
-          <i className="fas fa-home"></i>
+          <FaHome />
           Dashboard
         </NavLink>
 
         <NavLink to="/teacher/courses" className="nav-link">
-          <i className="fas fa-book"></i>
+          <FaBook />
           My Courses
         </NavLink>
 
         <NavLink to="/teacher/materials" className="nav-link">
-          <i className="fas fa-file-alt"></i>
+          <FaFileAlt />
           Study Material
         </NavLink>
 
         <NavLink to="/teacher/assignments" className="nav-link">
-          <i className="fas fa-tasks"></i>
+          <FaTasks />
           Assignments
         </NavLink>
 
         <NavLink to="/teacher/grading" className="nav-link">
-          <i className="fas fa-check-circle"></i>
+          <FaCheckCircle />
           Grading
         </NavLink>
 
-        <NavLink to="/teacher/analytics" className="nav-link">
-          <i className="fas fa-chart-line"></i>
-          Analytics
+        <NavLink to="/teacher/manage-courses" className="nav-link">
+          <FaChartLine />
+          ManageCourses
         </NavLink>
       </div>
 
-      <div className="nav-profile" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-        <img src="/default-avatar.png" alt="Profile" className="profile-image" />
+      <div
+        className="nav-profile"
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      >
+        <img
+          src="/default-avatar.png"
+          alt="Profile"
+          className="profile-image"
+        />
         <span className="profile-name">Dr. Smith</span>
-        
+
         {isDropdownOpen && (
           <div className="profile-dropdown">
             <NavLink to="/teacher/profile">
-              <i className="fas fa-user"></i>
+              <FaUser />
               Profile Settings
             </NavLink>
             <a href="#" onClick={(e) => e.preventDefault()}>
-              <i className="fas fa-sign-out-alt"></i>
+              <FaSignOutAlt />
               Logout
             </a>
           </div>

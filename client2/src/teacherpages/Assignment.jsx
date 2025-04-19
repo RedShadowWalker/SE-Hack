@@ -1,131 +1,167 @@
 import React, { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
+import { FaPlus, FaEdit, FaTrash, FaFileAlt } from "react-icons/fa";
 import "../teacherstyles/Assignment.css";
 
 const Assignments = () => {
+  const { isDarkMode } = useTheme();
+
   const [assignments, setAssignments] = useState([
     {
       id: 1,
-      title: "React Components Project",
+      title: "React Basics Quiz",
       course: "Web Development",
-      dueDate: "2024-02-01",
-      type: "Project",
+      dueDate: "2024-02-20",
+      type: "Quiz",
       submissions: 15,
-      totalStudents: 25,
+      totalStudents: 20,
+      status: "active",
     },
     {
       id: 2,
-      title: "Database Normalization Quiz",
+      title: "JavaScript Project",
+      course: "Web Development",
+      dueDate: "2024-02-25",
+      type: "Project",
+      submissions: 12,
+      totalStudents: 20,
+      status: "active",
+    },
+    {
+      id: 3,
+      title: "Database Design",
       course: "Database Management",
-      dueDate: "2024-01-25",
-      type: "Quiz",
+      dueDate: "2024-02-28",
+      type: "Assignment",
+      submissions: 18,
+      totalStudents: 20,
+      status: "active",
+    },
+    {
+      id: 4,
+      title: "HTML Basics",
+      course: "Frontend Basics",
+      dueDate: "2024-01-15",
+      type: "Assignment",
       submissions: 20,
-      totalStudents: 25,
+      totalStudents: 20,
+      status: "past",
+    },
+    {
+      id: 5,
+      title: "CSS Layout",
+      course: "Frontend Basics",
+      dueDate: "2024-01-20",
+      type: "Assignment",
+      submissions: 19,
+      totalStudents: 20,
+      status: "past",
     },
   ]);
 
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [assignmentType, setAssignmentType] = useState("assignment");
   const [newAssignment, setNewAssignment] = useState({
     title: "",
     course: "",
     dueDate: "",
     description: "",
     points: 100,
+    type: "Assignment",
   });
 
+  const handleCreate = (e) => {
+    e.preventDefault();
+    const newEntry = {
+      ...newAssignment,
+      id: assignments.length + 1,
+      submissions: 0,
+      totalStudents: 20,
+      status: "active",
+    };
+    setAssignments([newEntry, ...assignments]);
+    setNewAssignment({
+      title: "",
+      course: "",
+      dueDate: "",
+      description: "",
+      points: 100,
+      type: "Assignment",
+    });
+    setShowCreateForm(false);
+  };
+
+  const activeAssignments = assignments.filter((a) => a.status === "active");
+  const pastAssignments = assignments.filter((a) => a.status === "past");
+
   return (
-    <div className="assignments-container">
+    <div className={`assignments-container ${isDarkMode ? "dark-mode" : ""}`}>
       <div className="assignments-header">
-        <h1>Assignments & Quizzes</h1>
+        <h1>Assignments</h1>
         <button className="create-btn" onClick={() => setShowCreateForm(true)}>
-          Create New
+          <FaPlus /> Create New Assignment
         </button>
       </div>
 
-      <div className="assignments-filters">
-        <select defaultValue="">
-          <option value="">All Courses</option>
-          <option value="web">Web Development</option>
-          <option value="db">Database Management</option>
-        </select>
-        <select defaultValue="">
-          <option value="">All Types</option>
-          <option value="assignment">Assignment</option>
-          <option value="quiz">Quiz</option>
-          <option value="project">Project</option>
-        </select>
-      </div>
-
-      <div className="assignments-list">
-        {assignments.map((assignment) => (
-          <div key={assignment.id} className="assignment-card">
-            <div className="assignment-status">
-              <div
-                className="status-circle"
-                style={{
-                  backgroundColor:
-                    assignment.submissions === assignment.totalStudents
-                      ? "#4CAF50"
-                      : "#F8BB33",
-                }}
-              ></div>
-            </div>
-            <div className="assignment-info">
-              <h3>{assignment.title}</h3>
-              <p>Course: {assignment.course}</p>
-              <p>Due Date: {assignment.dueDate}</p>
-              <div className="submission-status">
-                <div className="progress-bar">
-                  <div
-                    className="progress"
-                    style={{
-                      width: `${
-                        (assignment.submissions / assignment.totalStudents) *
-                        100
-                      }%`,
-                    }}
-                  ></div>
+      <div className="assignments-grid">
+        <div className="assignments-section">
+          <h2>Active Assignments</h2>
+          <div className="assignment-list">
+            {activeAssignments.map((a) => (
+              <div key={a.id} className="assignment-card">
+                <div className="assignment-icon">
+                  <FaFileAlt />
                 </div>
-                <span>
-                  {assignment.submissions}/{assignment.totalStudents}{" "}
-                  Submissions
-                </span>
+                <div className="assignment-info">
+                  <h3>{a.title}</h3>
+                  <p>Course: {a.course}</p>
+                  <p>Due: {a.dueDate}</p>
+                  <p>
+                    {a.submissions}/{a.totalStudents} submissions
+                  </p>
+                </div>
+                <div className="assignment-actions">
+                  <button className="action-btn edit">
+                    <FaEdit />
+                  </button>
+                  <button className="action-btn delete">
+                    <FaTrash />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="assignment-actions">
-              <button className="view-btn">View Details</button>
-              <button className="edit-btn">Edit</button>
-              <button className="delete-btn">Delete</button>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="assignments-section">
+          <h2>Past Assignments</h2>
+          <div className="assignment-list">
+            {pastAssignments.map((a) => (
+              <div key={a.id} className="assignment-card past">
+                <div className="assignment-icon">
+                  <FaFileAlt />
+                </div>
+                <div className="assignment-info">
+                  <h3>{a.title}</h3>
+                  <p>Course: {a.course}</p>
+                  <p>Due: {a.dueDate}</p>
+                  <p>
+                    {a.submissions}/{a.totalStudents} submissions
+                  </p>
+                </div>
+                <div className="assignment-actions">
+                  <button className="action-btn view">View Results</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {showCreateForm && (
         <div className="modal-overlay">
           <div className="create-modal">
-            <h2>
-              Create New {assignmentType === "quiz" ? "Quiz" : "Assignment"}
-            </h2>
-            <div className="type-selector">
-              <button
-                className={`type-btn ${
-                  assignmentType === "assignment" ? "active" : ""
-                }`}
-                onClick={() => setAssignmentType("assignment")}
-              >
-                Assignment
-              </button>
-              <button
-                className={`type-btn ${
-                  assignmentType === "quiz" ? "active" : ""
-                }`}
-                onClick={() => setAssignmentType("quiz")}
-              >
-                Quiz
-              </button>
-            </div>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <h2>Create New Assignment</h2>
+            <form onSubmit={handleCreate}>
               <div className="form-group">
                 <label>Title</label>
                 <input
@@ -142,7 +178,8 @@ const Assignments = () => {
               </div>
               <div className="form-group">
                 <label>Course</label>
-                <select
+                <input
+                  type="text"
                   value={newAssignment.course}
                   onChange={(e) =>
                     setNewAssignment({
@@ -151,11 +188,7 @@ const Assignments = () => {
                     })
                   }
                   required
-                >
-                  <option value="">Select Course</option>
-                  <option value="web">Web Development</option>
-                  <option value="db">Database Management</option>
-                </select>
+                />
               </div>
               <div className="form-group">
                 <label>Due Date</label>
@@ -181,8 +214,7 @@ const Assignments = () => {
                       description: e.target.value,
                     })
                   }
-                  required
-                ></textarea>
+                />
               </div>
               <div className="form-group">
                 <label>Points</label>
