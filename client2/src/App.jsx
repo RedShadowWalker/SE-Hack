@@ -21,7 +21,7 @@ import Grading from "./teacherpages/Grading.jsx";
 
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
-// import "./styles/global.css";
+import "./styles/global.css";
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
@@ -76,14 +76,12 @@ function AppContent() {
 
 function App() {
   return (
-    // <ThemeProvider>
-    //   {/* <Routes>
-    //     <Route path="/teacher/*" element={<TeacherContent />} />
-    //     <Route path="/*" element={<StudentContent />} />
-    //   </Routes> */}
-
-    // </ThemeProvider>
-    <div className="text-5xl underline">Heelo</div>
+    <ThemeProvider>
+      <Routes>
+        <Route path="/teacher/*" element={<TeacherContent />} />
+        <Route path="/*" element={<StudentContent />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 
