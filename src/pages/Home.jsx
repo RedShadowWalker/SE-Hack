@@ -32,4 +32,13 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+
+const Home = () => {
+  return (
+    <div className="home">
+      <Calendar />
+    </div>
+  );
+};
+
+export default Home;
