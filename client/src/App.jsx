@@ -9,6 +9,8 @@ import CourseDetail from "./pages/CourseDetail.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
 import "./styles/global.css";
+import ContentHub from "./pages/ContentHub.jsx";
+import Assignments from "./pages/Assignments.jsx";
 
 function AppContent() {
   const { isDarkMode } = useTheme();
@@ -23,6 +25,9 @@ function AppContent() {
           <Route path="/course/:slug" element={<CourseDetail />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/account" element={<Account />} />
+          {/* New routes */}
+          <Route path="/contenthub" element={<ContentHub />} />
+          <Route path="/assignments" element={<Assignments />} />
         </Routes>
       </main>
     </div>
