@@ -1,5 +1,5 @@
 import React from 'react';
-import './Calendar.css';  // We'll put the styles in a separate CSS file
+import '../styles/Calendar.css';  // We'll put the styles in a separate CSS file
 
 const Calendar = () => {
   return (
