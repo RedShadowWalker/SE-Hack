@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "../src/context/ThemeContext";
-import { useTheme } from "../src/context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { useTheme } from "./context/ThemeContext.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Courses from "./pages/Courses.jsx";
