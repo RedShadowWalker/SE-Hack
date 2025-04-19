@@ -1,0 +1,15 @@
+import React from "react";
+// import "./styles/global.css"; // Global styles
+import "./index.css"; // Tailwind CSS styles
+
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
