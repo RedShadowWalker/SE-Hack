@@ -1,18 +1,54 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { useTheme } from "./context/ThemeContext.jsx";
 import Navbar from "./components/Navbar.jsx";
+import TeacherNavbar from "./components/teachernavbar.jsx";
 import Home from "./pages/Home.jsx";
 import Courses from "./pages/Courses.jsx";
 import CourseDetail from "./pages/CourseDetail.jsx";
 import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
+
+// Teacher Pages
+import Dashboard from "./teacherpages/Dashboard.jsx";
+import ManageCourses from "./teacherpages/ManageCourses.jsx";
+import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
+import Assignments from "./teacherpages/Assignments.jsx";
+import Grading from "./teacherpages/Grading.jsx";
+//import Analytics from "./teacherpages/Analytics.jsx";
+import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
+
 import "./styles/global.css";
 import ContentHub from "./pages/ContentHub.jsx";
 import Assignments from "./pages/Assignments.jsx";
 
-function AppContent() {
+function TeacherContent() {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div className={`App ${isDarkMode ? "dark-mode" : ""}`}>
+      <TeacherNavbar />
+      <main className={isDarkMode ? "dark-mode" : ""}>
+        <Routes>
+          <Route path="/teacher/" element={<Dashboard />} />
+          <Route path="/teacher/manage-courses" element={<ManageCourses />} />
+          <Route path="/teacher/study-material" element={<StudyMaterial />} />
+          <Route path="/teacher/assignments" element={<Assignments />} />
+          <Route path="/teacher/grading" element={<Grading />} />
+          <Route path="/teacher/analytics" element={<Analytics />} />
+          <Route path="/teacher/profile" element={<TeacherProfile />} />
+          <Route
+            path="*"
+            element={<Navigate to="/teacher/" replace />}
+          />
+        </Routes>
+      </main>
+    </div>
+  );
+}
+
+function StudentContent() {
   const { isDarkMode } = useTheme();
 
   return (
@@ -34,10 +70,20 @@ function AppContent() {
   );
 }
 
+function AppContent() {
+  // You can implement actual auth logic here
+  const isTeacher = window.location.pathname.startsWith("/teacher");
+
+  return isTeacher ? <TeacherContent /> : <StudentContent />;
+}
+
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <Routes>
+        <Route path="/teacher/*" element={<TeacherContent />} />
+        <Route path="/*" element={<StudentContent />} />
+      </Routes>
     </ThemeProvider>
   );
 }
