@@ -21,7 +21,7 @@ import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
 import "./styles/global.css";
 import ContentHub from "./pages/ContentHub.jsx";
-import Assignments from "./pages/Assignments.jsx";
+import assignments from "./pages/Assignments.jsx";
 
 function TeacherContent() {
   const { isDarkMode } = useTheme();
