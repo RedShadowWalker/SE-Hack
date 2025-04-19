@@ -2,79 +2,131 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.account-container.dark-mode {
+  background-color: #1a1a1a;
 }
 
 .account-header {
+  background: linear-gradient(to right, #1d82be, #3498db);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-.account-header h1 {
-  color: #333;
+.account-header.dark-mode {
+  background: linear-gradient(to right, #2c3e50, #3498db);
+}
+
+.account-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.account-content.dark-mode {
+  background: #2a2a2a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .profile-section {
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e7ecfa;
+}
+
+.profile-section.dark-mode {
+  border-bottom-color: #3a3a3a;
 }
 
 .profile-image img {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid #1d82be;
 }
 
 .profile-info h2 {
+  color: #1d82be;
   margin-bottom: 0.5rem;
-  color: #333;
+}
+
+.profile-info.dark-mode h2 {
+  color: #3498db;
 }
 
 .profile-info p {
-  color: #666;
+  color: #7e899c;
 }
 
-.dashboard-section {
-  padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.profile-info.dark-mode p {
+  color: #e7ecfa;
+}
+
+.dashboard-section h3 {
+  color: #1d82be;
+  margin-bottom: 2rem;
+}
+
+.dashboard-section.dark-mode h3 {
+  color: #3498db;
 }
 
 .progress-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
 }
 
 .progress-card {
-  padding: 1.5rem;
   background: #f8f9fa;
+  padding: 1.5rem;
   border-radius: 8px;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.progress-card.dark-mode {
+  background: #3a3a3a;
 }
 
 .progress-card h4 {
-  color: #666;
-  margin-bottom: 0.5rem;
+  color: #1d82be;
+  margin-bottom: 1rem;
+}
+
+.progress-card.dark-mode h4 {
+  color: #3498db;
 }
 
 .progress-card p {
   font-size: 2rem;
   font-weight: bold;
-  color: #2563eb;
+  color: #f8b530;
+}
+
+.progress-card.dark-mode p {
+  color: #f8b530;
 }
 
 @media (max-width: 768px) {
+  .account-container {
+    padding: 1rem;
+  }
+
   .profile-section {
     flex-direction: column;
     text-align: center;
+    gap: 1rem;
   }
 
   .progress-cards {

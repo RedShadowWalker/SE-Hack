@@ -1,22 +1,39 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
-import Home from "./pages/Home";
-import Courses from "./pages/Courses";
-import Account from "./pages/Account";
-import Quiz from "./pages/Quiz";
+import { ThemeProvider } from "../src/context/ThemeContext";
+import { useTheme } from "../src/context/ThemeContext";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import Courses from "./pages/Courses.jsx";
+import CourseDetail from "./pages/CourseDetail.jsx";
+import Quiz from "./pages/Quiz.jsx";
+import Account from "./pages/Account.jsx";
+import "./styles/global.css";
+
+function AppContent() {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div className={`App ${isDarkMode ? "dark-mode" : ""}`}>
+      <Navbar />
+      <main className={isDarkMode ? "dark-mode" : ""}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/course/:slug" element={<CourseDetail />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/account" element={<Account />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/quiz" element={<Quiz />} />
-      </Routes>
-    </>
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 
