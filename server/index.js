@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 dotenv.config();
 
-import uploadRoutes from "./routes/uploads.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import saveResultsRoute from "./routes/saveResults.js";
 import assignmentsRoute from './routes/assignments.js';
 import subsRoute from './routes/assignmentSubmissions.js';
@@ -32,7 +32,7 @@ app.use(cors({
 
 // routes
 app.use("/api/quiz-results", saveResultsRoute);
-app.use("/api/uploads", uploadRoutes);
+app.use("/api/uploadRoutes", uploadRoutes);
 
 app.use('/api/assignments', assignmentsRoute);
 app.use('/api/assignments', subsRoute);

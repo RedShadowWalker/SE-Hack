@@ -26,7 +26,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 
     // upload to Cloudinary
     const result = await cloudinary.uploader.upload(filePath, {
-      folder: "my_uploads",               // optional
+      folder: "my_uploads",               // optional - folder name
       resource_type: "auto",              // accepts images, videos, etc.
     });
 
@@ -34,7 +34,12 @@ router.post("/upload", upload.single("file"), async (req, res) => {
     fs.unlinkSync(filePath);
 
     // return Cloudinary URL
-    res.json({ url: result.secure_url });
+    res.status(200).json({
+      message: 'File uploaded successfully',
+      url: result.secure_url,               
+      public_id: result.public_id,});   // return 200 OK HTTPS Status code, with the Cloudinary URL
+
+    //res.json({ url: result.secure_url });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
