@@ -2,7 +2,7 @@
 
 .content-hub {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 16px;
   background-color: #f9fafb;
@@ -511,4 +511,226 @@
 
 .theme-toggle-btn:hover {
   background-color: #4f46e5;
+}
+
+.content-hub {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content.shifted {
+  margin-right: 400px; /* Shift the main content to the left by the width of the sidebar */
+}
+
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px; /* Sidebar width */
+  height: 100%;
+  background-color: #f0f4f8; /* Light blue background */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1E3A8A; /* Blue color */
+}
+
+.close-cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1E3A8A; /* Blue color */
+}
+
+.cart-items-container {
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1E3A8A; /* Blue color */
+}
+
+.cart-item-price {
+  .price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .current-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1E3A8A; /* Blue color */
+  }
+  
+  .original-price {
+    font-size: 14px;
+    color: #6b7280;
+    text-decoration: line-through;
+  }
+  
+  .discount {
+    font-size: 14px;
+    color: #10b981; /* Green color for discount */
+    font-weight: 500;
+  }
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1E3A8A; /* Blue color */
+}
+
+.quantity-input {
+  width: 40px;
+  padding: 5px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef4444; /* Red color for remove */
+}
+
+.coupon-section {
+  margin-bottom: 20px;
+}
+
+.coupon-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.coupon-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+}
+
+.apply-coupon-btn {
+  padding: 8px 12px;
+  background-color: #1E3A8A; /* Blue color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.applied-coupon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  color: #1E3A8A; /* Blue color */
+}
+
+.cart-summary {
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #1E3A8A; /* Blue color */
+}
+
+.cart-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.checkout-btn,
+.clear-cart-btn {
+  flex: 1;
+  padding: 12px;
+  background-color: #1E3A8A; /* Blue color */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cart-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.cart-help a {
+  color: #1E3A8A; /* Blue color */
+  text-decoration: none;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px; /* Kept as original */
+  height: 100%;
+  background-color: var(--primary-blue);
+  transition: transform var(--transition-speed);
+  transform: translateX(-100%); /* Initially hidden */
+  z-index: 1000; /* Added to ensure sidebar appears above content */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Slide in from the left */
+}
+
+.contenthub-container {
+  transition: margin-left var(--transition-speed); /* Changed from margin-right to margin-left */
+  margin-left: 0; /* Default position, changed from margin-right to margin-left */
+}
+
+.contenthub-container.shifted {
+  margin-left: 250px; /* Changed from margin-right to margin-left - this shifts content to the right when sidebar is open */
 }
