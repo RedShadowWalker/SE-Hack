@@ -2,6 +2,8 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { useTheme } from "./context/ThemeContext.jsx";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
 import Navbar from "./components/Navbar.jsx";
 import TeacherNavbar from "./components/teachernavbar.jsx";
 import Home from "./pages/Home.jsx";
@@ -11,6 +13,8 @@ import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
 import ContentHub from "./pages/ContentHub.jsx";
 import Assignments from "./pages/Assignments.jsx";
+import Quizz from "./components/Student/Quizz.jsx";
+import OngoingQuiz from "./components/Student/OngoingQuiz.jsx";
 
 // Teacher Pages
 import Dashboard from "./teacherpages/Dashboard.jsx";
@@ -18,7 +22,6 @@ import ManageCourses from "./teacherpages/ManageCourses.jsx";
 import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
 import Assignment from "./teacherpages/Assignment.jsx";
 import Grading from "./teacherpages/Grading.jsx";
-
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
 import "./styles/global.css";
@@ -56,7 +59,7 @@ function StudentContent() {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/course/:slug" element={<CourseDetail />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quizz" element={<Quizz />} />
           <Route path="/account" element={<Account />} />
           {/* New routes */}
           <Route path="/contenthub" element={<ContentHub />} />
@@ -74,9 +77,28 @@ function AppContent() {
   return isTeacher ? <TeacherContent /> : <StudentContent />;
 }
 
-function App() {
+// function App() {
+//   return (
+//     <ThemeProvider>
+//       <Routes>
+//         <Route path="/teacher/*" element={<TeacherContent />} />
+//         <Route path="/*" element={<StudentContent />} />
+//       </Routes>
+//     </ThemeProvider>
+//   );
+// }
+
+export default function App() {
   return (
     <ThemeProvider>
+      <header>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </header>
       <Routes>
         <Route path="/teacher/*" element={<TeacherContent />} />
         <Route path="/*" element={<StudentContent />} />
@@ -84,5 +106,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

@@ -1,364 +1,189 @@
+// src/pages/Assignments.jsx
 import React, { useEffect, useState, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
+import { FaPlus, FaEdit, FaTrash, FaFileAlt } from "react-icons/fa";
 import "../styles/Assignments.css"; // Ensure this path is correct
 import { ChevronLeft, ChevronRight, User, BookOpen, FileText } from "lucide-react";
+import CreateQuiz from "../components/Teacher/CreateQuiz";
 
 const Assignments = () => {
-  // Refs for the slider elements
-  const lectureSliderRef = useRef(null);
-  const notesSliderRef = useRef(null);
-  const answerKeySliderRef = useRef(null);
-  
-  // State to handle active subject
-  const [activeSubject, setActiveSubject] = useState('physics');
-  
-  // Auto-sliding functionality
-  useEffect(() => {
-    const lectureSlider = lectureSliderRef.current;
-    const notesSlider = notesSliderRef.current;
-    
-    let lectureInterval = setInterval(() => {
-      if (lectureSlider) {
-        if (lectureSlider.scrollLeft + lectureSlider.clientWidth >= lectureSlider.scrollWidth - 20) {
-          lectureSlider.scrollLeft = 0;
-        } else {
-          lectureSlider.scrollLeft += 200;
-        }
-      }
-    }, 3000);
-    
-    let notesInterval = setInterval(() => {
-      if (notesSlider) {
-        if (notesSlider.scrollLeft + notesSlider.clientWidth >= notesSlider.scrollWidth - 20) {
-          notesSlider.scrollLeft = 0;
-        } else {
-          notesSlider.scrollLeft += 200;
-        }
-      }
-    }, 3500);
-    
-    return () => {
-      clearInterval(lectureInterval);
-      clearInterval(notesInterval);
+  const { isDarkMode } = useTheme();
+
+  const [assignments, setAssignments] = useState([
+    { id: 1, title: "React Basics Quiz",    course: "Web Development",      dueDate: "2024-02-20", type: "Quiz",       submissions: 15, totalStudents: 20, status: "active" },
+    { id: 2, title: "JavaScript Project",   course: "Web Development",      dueDate: "2024-02-25", type: "Project",    submissions: 12, totalStudents: 20, status: "active" },
+    { id: 3, title: "Database Design",      course: "Database Management",  dueDate: "2024-02-28", type: "Assignment", submissions: 18, totalStudents: 20, status: "active" },
+    { id: 4, title: "HTML Basics",          course: "Frontend Basics",      dueDate: "2024-01-15", type: "Assignment", submissions: 20, totalStudents: 20, status: "past"   },
+    { id: 5, title: "CSS Layout",           course: "Frontend Basics",      dueDate: "2024-01-20", type: "Assignment", submissions: 19, totalStudents: 20, status: "past"   },
+  ]);
+
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [showQuizForm, setShowQuizForm]       = useState(false);
+
+  const [newAssignment, setNewAssignment] = useState({
+    title: "",
+    course: "",
+    dueDate: "",
+    description: "",
+    points: 100,
+    type: "Assignment",
+  });
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    const entry = {
+      ...newAssignment,
+      id: assignments.length + 1,
+      submissions: 0,
+      totalStudents: 20,
+      status: "active",
     };
-  }, []);
-  
-  // Handle manual scrolling
-  const scroll = (ref, direction) => {
-    if (ref.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
-      ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    setAssignments([entry, ...assignments]);
+    setNewAssignment({
+      title: "", course: "", dueDate: "", description: "", points: 100, type: "Assignment",
+    });
+    setShowCreateForm(false);
   };
-  
-  const handleSubjectClick = (subject) => {
-    setActiveSubject(subject);
-  };
-  
+
+  const activeAssignments = assignments.filter(a => a.status === "active");
+  const pastAssignments   = assignments.filter(a => a.status === "past");
+
   return (
-    <div className="assignments-container">
-      <div className="jee-header">
-        <h1 className="site-title">JEE ZONE</h1>
-        <div className="user-profile">
-          <User size={24} />
-        </div>
+    <div className={`assignments-container ${isDarkMode ? "dark-mode" : ""}`}>
+      {/* Header with two create buttons */}
+      <div className="assignments-header">
+        <h1>Assignments</h1>
+
+        {/* Create Quiz */}
+        <button
+          className="create-btn"
+          onClick={() => setShowQuizForm(true)}
+        >
+          <FaPlus /> Create New Quiz
+        </button>
+
+        {/* Create Assignment */}
+        <button
+          className="create-btn"
+          onClick={() => setShowCreateForm(true)}
+        >
+          <FaPlus /> Create New Assignment
+        </button>
       </div>
-      
-      {/* Main Subjects Section */}
-      <div className="zone-section main-subjects">
-        <div className="subject-container">
-          <div 
-            className={`subject-card ${activeSubject === 'physics' ? 'active' : ''}`}
-            onClick={() => handleSubjectClick('physics')}
-          >
-            <div className="subject-icon physics-icon">
-              <svg viewBox="0 0 24 24" className="icon">
-                <circle cx="12" cy="12" r="3" fill="#64B5F6" />
-                <path d="M12 2L12 22" stroke="#4CAF50" strokeWidth="1" />
-                <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#FF9800" strokeWidth="1" fill="none" />
-              </svg>
-            </div>
-            <div className="subject-info">
-              <h3>Physics</h3>
-              <p>JEE ZONE</p>
-            </div>
-          </div>
-          
-          <div 
-            className={`subject-card ${activeSubject === 'chemistry' ? 'active' : ''}`}
-            onClick={() => handleSubjectClick('chemistry')}
-          >
-            <div className="subject-icon chemistry-icon">
-              <svg viewBox="0 0 24 24" className="icon">
-                <rect x="8" y="4" width="8" height="16" rx="2" fill="#64B5F6" />
-                <circle cx="12" cy="8" r="2" fill="#EF5350" />
-                <circle cx="12" cy="16" r="2" fill="#EF5350" />
-                <path d="M7 10L17 10" stroke="#4CAF50" strokeWidth="1" />
-                <path d="M7 14L17 14" stroke="#4CAF50" strokeWidth="1" />
-              </svg>
-            </div>
-            <div className="subject-info">
-              <h3>Chemistry</h3>
-              <p>JEE ZONE</p>
-            </div>
-          </div>
-          
-          <div 
-            className={`subject-card ${activeSubject === 'mathematics' ? 'active' : ''}`}
-            onClick={() => handleSubjectClick('mathematics')}
-          >
-            <div className="subject-icon math-icon">
-              <svg viewBox="0 0 24 24" className="icon">
-                <path d="M5 12H19" stroke="#EF5350" strokeWidth="2" />
-                <path d="M12 5L12 19" stroke="#EF5350" strokeWidth="2" />
-                <path d="M6 6L18 18" stroke="#FF9800" strokeWidth="1" />
-                <path d="M18 6L6 18" stroke="#FF9800" strokeWidth="1" />
-                <path d="M5 16L9 16" stroke="#4CAF50" strokeWidth="1" />
-                <path d="M15 16L19 16" stroke="#4CAF50" strokeWidth="1" />
-              </svg>
-            </div>
-            <div className="subject-info">
-              <h3>Mathematics</h3>
-              <p>JEE ZONE</p>
-            </div>
+
+      {/* Assignments Grid */}
+      <div className="assignments-grid">
+        {/* Active */}
+        <div className="assignments-section">
+          <h2>Active Assignments</h2>
+          <div className="assignment-list">
+            {activeAssignments.map(a => (
+              <div key={a.id} className="assignment-card">
+                <div className="assignment-icon"><FaFileAlt /></div>
+                <div className="assignment-info">
+                  <h3>{a.title}</h3>
+                  <p>Course: {a.course}</p>
+                  <p>Due: {a.dueDate}</p>
+                  <p>{a.submissions}/{a.totalStudents} submissions</p>
+                </div>
+                <div className="assignment-actions">
+                  <button className="action-btn edit"><FaEdit /></button>
+                  <button className="action-btn delete"><FaTrash /></button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-      
-      {/* Free Lectures Section */}
-      <div className="zone-section">
-        <h2 className="section-title">Free Lectures by Star faculties</h2>
-        <div className="slider-container">
-          <button className="slider-button left" onClick={() => scroll(lectureSliderRef, 'left')}>
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div className="slider-content" ref={lectureSliderRef}>
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <circle cx="12" cy="12" r="5" fill="#E0E0E0" />
-                  <circle cx="8" cy="8" r="2" fill="#9C27B0" />
-                  <circle cx="16" cy="8" r="2" fill="#2196F3" />
-                  <circle cx="16" cy="16" r="2" fill="#FF5722" />
-                </svg>
+
+        {/* Past */}
+        <div className="assignments-section">
+          <h2>Past Assignments</h2>
+          <div className="assignment-list">
+            {pastAssignments.map(a => (
+              <div key={a.id} className="assignment-card past">
+                <div className="assignment-icon"><FaFileAlt /></div>
+                <div className="assignment-info">
+                  <h3>{a.title}</h3>
+                  <p>Course: {a.course}</p>
+                  <p>Due: {a.dueDate}</p>
+                  <p>{a.submissions}/{a.totalStudents} submissions</p>
+                </div>
+                <div className="assignment-actions">
+                  <button className="action-btn view">View Results</button>
+                </div>
               </div>
-              <div className="subject-info">
-                <h3>Best of Raman</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
-            
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="8" y="4" width="8" height="12" rx="2" fill="#64B5F6" />
-                  <circle cx="12" cy="8" r="2" fill="#EF5350" />
-                  <circle cx="12" cy="14" r="1" fill="#8BC34A" />
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Best of Alka</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
-            
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <path d="M6 10L18 10" stroke="#9C27B0" strokeWidth="2" />
-                  <path d="M12 4L12 16" stroke="#9C27B0" strokeWidth="2" />
-                  <circle cx="12" cy="10" r="6" stroke="#FF9800" strokeWidth="1" fill="none" />
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Best of Pankaj</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
-            
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <circle cx="12" cy="12" r="6" fill="#E0E0E0" />
-                  <path d="M9 12L15 12" stroke="#4CAF50" strokeWidth="2" />
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Best of Tanvi</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
-            
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="6" y="6" width="12" height="12" rx="2" fill="#FFEB3B" />
-                  <text x="9" y="15" fontSize="6" fill="#333">1</text>
-                  <text x="13" y="12" fontSize="6" fill="#333">2</text>
-                  <text x="11" y="18" fontSize="6" fill="#333">3</text>
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Best of Arjun</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
-            
-            <div className="subject-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <circle cx="12" cy="12" r="6" fill="#E0E0E0" />
-                  <path d="M9 12L15 12" stroke="#4CAF50" strokeWidth="2" />
-                  <path d="M12 9L12 15" stroke="#4CAF50" strokeWidth="2" />
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Best of Bhavna</h3>
-                <p>Free Lectures</p>
-              </div>
-            </div>
+            ))}
           </div>
-          
-          <button className="slider-button right" onClick={() => scroll(lectureSliderRef, 'right')}>
-            <ChevronRight size={24} />
-          </button>
         </div>
       </div>
-      
-      {/* Notes Section */}
-      <div className="zone-section">
-        <h2 className="section-title">Notes</h2>
-        <div className="slider-container">
-          <button className="slider-button left" onClick={() => scroll(notesSliderRef, 'left')}>
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div className="slider-content" ref={notesSliderRef}>
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <FileText size={30} className="card-icon" />
+
+      {/* Create Assignment Modal */}
+      {showCreateForm && (
+        <div className="modal-overlay">
+          <div className="create-modal">
+            <button
+              className="modal-close"
+              onClick={() => setShowCreateForm(false)}
+            >
+              ✕
+            </button>
+            <h2>Create New Assignment</h2>
+            <form onSubmit={handleCreate}>
+              <div className="form-group">
+                <label>Title</label>
+                <input
+                  type="text"
+                  value={newAssignment.title}
+                  onChange={e => setNewAssignment({ ...newAssignment, title: e.target.value })}
+                  required
+                />
               </div>
-              <div className="subject-info">
-                <h3>JEE Toppers</h3>
-                <p>Notes</p>
+              <div className="form-group">
+                <label>Course</label>
+                <input
+                  type="text"
+                  value={newAssignment.course}
+                  onChange={e => setNewAssignment({ ...newAssignment, course: e.target.value })}
+                  required
+                />
               </div>
-            </div>
-            
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <FileText size={30} className="card-icon" />
+              <div className="form-group">
+                <label>Due Date</label>
+                <input
+                  type="date"
+                  value={newAssignment.dueDate}
+                  onChange={e => setNewAssignment({ ...newAssignment, dueDate: e.target.value })}
+                  required
+                />
               </div>
-              <div className="subject-info">
-                <h3>NEET Toppers</h3>
-                <p>Notes</p>
+              <div className="form-group">
+                <label>Description</label>
+                <textarea
+                  value={newAssignment.description}
+                  onChange={e => setNewAssignment({ ...newAssignment, description: e.target.value })}
+                />
               </div>
-            </div>
-            
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="4" y="4" width="16" height="16" rx="2" fill="#1565C0" />
-                  <text x="8" y="14" fontSize="8" fill="#FFFFFF">9</text>
-                </svg>
+              <div className="form-group">
+                <label>Points</label>
+                <input
+                  type="number"
+                  value={newAssignment.points}
+                  onChange={e => setNewAssignment({
+                    ...newAssignment,
+                    points: parseInt(e.target.value, 10),
+                  })}
+                  required
+                />
               </div>
-              <div className="subject-info">
-                <h3>Class 9</h3>
-                <p>Notes</p>
-              </div>
-            </div>
-            
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="4" y="4" width="16" height="16" rx="2" fill="#1565C0" />
-                  <text x="8" y="14" fontSize="8" fill="#FFFFFF">10</text>
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Class 10</h3>
-                <p>Notes</p>
-              </div>
-            </div>
-            
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="4" y="4" width="16" height="16" rx="2" fill="#1565C0" />
-                  <text x="8" y="14" fontSize="8" fill="#FFFFFF">11</text>
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Class 11</h3>
-                <p>Notes</p>
-              </div>
-            </div>
-            
-            <div className="subject-card notes-card">
-              <div className="subject-icon">
-                <svg viewBox="0 0 24 24" className="icon">
-                  <rect x="4" y="4" width="16" height="16" rx="2" fill="#1565C0" />
-                  <text x="8" y="14" fontSize="8" fill="#FFFFFF">12</text>
-                </svg>
-              </div>
-              <div className="subject-info">
-                <h3>Class 12</h3>
-                <p>Notes</p>
-              </div>
-            </div>
-          </div>
-          
-          <button className="slider-button right" onClick={() => scroll(notesSliderRef, 'right')}>
-            <ChevronRight size={24} />
-          </button>
-        </div>
-      </div>
-      
-      {/* Answer Key Zone */}
-      <div className="zone-section">
-        <h2 className="section-title">Answer Key Zone</h2>
-        <div className="slider-container">
-          <button className="slider-button left" onClick={() => scroll(answerKeySliderRef, 'left')}>
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div className="answer-key-container" ref={answerKeySliderRef}>
-            <div className="subject-card answer-key-card">
-              <div className="subject-icon">
-                <BookOpen size={30} className="card-icon" />
-              </div>
-              <div className="subject-info">
-                <h3>JEE MAINS</h3>
-                <p>Answer Keys</p>
-              </div>
-            </div>
-            
-            <div className="subject-card answer-key-card">
-              <div className="subject-icon">
-                <BookOpen size={30} className="card-icon" />
-              </div>
-              <div className="subject-info">
-                <h3>NEET</h3>
-                <p>Answer Keys</p>
-              </div>
-            </div>
-            
-            <div className="subject-card answer-key-card">
-              <div className="subject-icon">
-                <BookOpen size={30} className="card-icon" />
-              </div>
-              <div className="subject-info">
-                <h3>JEE Advance</h3>
-                <p>Answer Keys</p>
-              </div>
-            </div>
-            
-            <div className="subject-card answer-key-card">
-              <div className="subject-icon">
-                <BookOpen size={30} className="card-icon" />
-              </div>
-              <div className="subject-info">
-                <h3>Anjaam Test</h3>
-                <p>Answer Keys</p>
+              <div className="modal-actions">
+                <button type="submit" className="submit-btn">Create</button>
+                <button
+                  type="button"
+                  className="cancel-btn"
+                  onClick={() => window.location.reload()}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           </div>
@@ -367,17 +192,16 @@ const Assignments = () => {
             <ChevronRight size={24} />
           </button>
         </div>
-      </div>
-      
-      {/* User avatar at the bottom right */}
-      <div className="user-avatar">
-        <svg viewBox="0 0 40 40">
-          <circle cx="20" cy="20" r="18" fill="#C5CAE9" />
-          <circle cx="20" cy="16" r="6" fill="#1565C0" />
-          <path d="M10 32C10 26 14 22 20 22C26 22 30 26 30 32" fill="#1565C0" />
-          <rect x="14" y="13" width="12" height="2" rx="1" fill="#C5CAE9" />
-        </svg>
-      </div>
+      )}
+
+      {/* Create Quiz Modal */}
+      {showQuizForm && (
+        <div className="modal-overlay">
+          <div className="create-modal">
+            <CreateQuiz onClose={() => setShowQuizForm(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

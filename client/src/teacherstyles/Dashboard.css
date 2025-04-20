@@ -60,33 +60,58 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0 2rem;
+  padding: 1rem 2rem;
   margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
 }
 
 .dark-mode .dashboard-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--dark-card);
+  border-bottom: none;
+  box-shadow: var(--shadow-md);
+}
+
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .logo-section h1 {
-  font-size: 1.8rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: var(--primary-color);
-  margin-bottom: 0.2rem;
+  margin: 0;
   letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .dark-mode .logo-section h1 {
   color: #6c8fff;
 }
 
-.logo-section p {
+.logo-section p,
+.profile-details p,
+.date-time p,
+.class-time,
+.class-details p,
+.submission-time,
+.announcement-date,
+.announcement-item p {
   color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
-.dark-mode .logo-section p {
+.dark-mode .logo-section p,
+.dark-mode .profile-details p,
+.dark-mode .date-time p,
+.dark-mode .class-time,
+.dark-mode .class-details p,
+.dark-mode .submission-time,
+.dark-mode .announcement-date,
+.dark-mode .announcement-item p {
   color: var(--dark-text-secondary);
 }
 
@@ -98,16 +123,15 @@ body {
 
 /* Theme Toggle Button */
 .theme-toggle {
-  background: none;
+  background: var(--bg-card);
   border: none;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-card);
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
@@ -117,8 +141,12 @@ body {
 }
 
 .theme-icon {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .dark-mode .theme-icon {
@@ -129,17 +157,24 @@ body {
 .profile-section {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .notification-badge {
   position: relative;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .notification-badge svg {
   font-size: 1.3rem;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .dark-mode .notification-badge svg {

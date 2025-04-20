@@ -79,11 +79,6 @@ const Courses = () => {
     <div className={`courses-page ${isDarkMode ? "dark-mode" : ""}`}>
       <div className={`courses-hero ${isDarkMode ? "dark-mode" : ""}`}>
         <h1>My Courses</h1>
-        <div className={`breadcrumb ${isDarkMode ? "dark-mode" : ""}`}>
-          <span>Home</span>
-          <span className="separator">/</span>
-          <span>My Courses</span>
-        </div>
       </div>
 
       <div className={`courses-grid ${isDarkMode ? "dark-mode" : ""}`}>

@@ -11,9 +11,9 @@
 
 .courses-hero {
   background: linear-gradient(
-    rgba(29, 130, 190, 0.95),
-    rgba(29, 130, 190, 0.9)
-  );
+    #1d66ce,
+    #1d66ce 
+     );
   color: white;
   padding: 3rem;
   text-align: center;
