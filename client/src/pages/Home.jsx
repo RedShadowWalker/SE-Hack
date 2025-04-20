@@ -14,7 +14,13 @@ import {
   Legend,
 } from "chart.js";
 import { Bar, Pie, Line } from "react-chartjs-2";
-import { FaTrophy, FaUserGraduate, FaBell } from "react-icons/fa";
+import {
+  FaTrophy,
+  FaUserGraduate,
+  FaBell,
+  FaPlay,
+  FaPlus,
+} from "react-icons/fa";
 import "../styles/Home.css";
 
 ChartJS.register(
@@ -45,6 +51,8 @@ const Home = () => {
       { id: 3, text: "Quiz scheduled for next week", type: "reminder" },
     ],
   };
+
+  profileData.name = <strong>{profileData.name}</strong>;
 
   const attendanceData = {
     labels: [
@@ -122,8 +130,47 @@ const Home = () => {
     { name: "Mike Wilson", score: 82, rank: 5, avatar: "⭐" },
   ];
 
+  const videoData = [
+    {
+      id: 1,
+      title: "React Components Project",
+      course: "Web Development",
+      duration: "00:31",
+      thumbnail: "gradient-1",
+      url: "https://www.youtube.com/watch?v=example1",
+    },
+    {
+      id: 2,
+      title: "Database Normalization Quiz",
+      course: "Database Management",
+      duration: "00:32",
+      thumbnail: "gradient-2",
+      url: "https://www.youtube.com/watch?v=example2",
+    },
+    {
+      id: 3,
+      title: "JavaScript Fundamentals",
+      course: "Web Development",
+      duration: "00:33",
+      thumbnail: "gradient-3",
+      url: "https://www.youtube.com/watch?v=example3",
+    },
+    {
+      id: 4,
+      title: "SQL Basics",
+      course: "Database Management",
+      duration: "00:34",
+      thumbnail: "gradient-4",
+      url: "https://www.youtube.com/watch?v=example4",
+    },
+  ];
+
   const handleCardClick = (cardName) => {
     setExpandedCard(expandedCard === cardName ? null : cardName);
+  };
+
+  const handleVideoClick = (url) => {
+    window.open(url, "_blank");
   };
 
   const cardVariants = {
@@ -169,7 +216,6 @@ const Home = () => {
             <p className="stat-label">Achievements</p>
           </div>
         </div>
-
         <div className="stat-card courses">
           <FaUserGraduate className="stat-icon" />
           <div className="stat-content">
@@ -300,19 +346,32 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* Video Grid Section */}
-      <div className="video-grid">
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="video-card">
-            <div className="video-thumbnail">
-              <div className="play-button">
-                <span>Play Video</span>
+      <div className="home-header">
+        <h2>Online Classes</h2>
+      </div>
+
+      {/* Video Scroll Grid */}
+      <div className="video-scroll-container">
+        <div className="video-scroll-track">
+          {[...videoData, ...videoData].map((video, index) => (
+            <div
+              key={index}
+              className={`video-frame ${video.thumbnail}`}
+              onClick={() => handleVideoClick(video.url)}
+            >
+              <div className="video-overlay">
+                <button className="play-button">
+                  <FaPlay />
+                </button>
+                <span className="duration">{video.duration}</span>
               </div>
-              <div className="video-duration">00:{30 + item}</div>
+              <div className="video-info">
+                <h3>{video.title}</h3>
+                <p>{video.course}</p>
+              </div>
             </div>
-            <h3>Class Title</h3>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </motion.div>
   );

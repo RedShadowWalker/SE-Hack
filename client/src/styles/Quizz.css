@@ -1,0 +1,297 @@
+/* Quiz.css - Main styles for the entire quiz application */
+
+/* Base Styles */
+:root {
+  --bg-primary: #121212;
+  --card-bg: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --border-color: #333333;
+  --option-bg: #2a2a2a;
+  --option-hover: #3a3a3a;
+  --option-selected: #373737;
+  --primary-color: #e91e63;
+  --secondary-color: #2196f3;
+  --accent-color: #bb86fc;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Quiz Page Layout */
+.quiz-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.quiz-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Quiz Header */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+}
+
+.quiz-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.timer-badge {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.timer-badge span {
+  color: var(--primary-color);
+}
+
+/* Quiz Selection Screen */
+.selection-title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.quiz-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quiz-option-button {
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  text-align: left;
+  padding: 0.75rem 0;
+  transition: all 0.2s ease;
+}
+
+.quiz-option-button:hover {
+  opacity: 0.8;
+  transform: translateX(5px);
+}
+
+/* Loading State */
+.loading-text {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem 0;
+}
+
+/* Results Screen */
+.results-container {
+  text-align: center;
+}
+
+.result-heading {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.score-display {
+  margin: 2rem 0;
+}
+
+.score-text {
+  font-size: 1.2rem;
+}
+
+.score-value {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.restart-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.restart-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* OngoingQuiz.css - Styles specific to the quiz question component */
+
+/* Question Styles */
+.question-container {
+  margin-bottom: 2rem;
+}
+
+.question-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.question-text .highlight {
+  color: var(--secondary-color);
+}
+
+.question-text .emphasis {
+  color: var(--primary-color);
+}
+
+/* Option Buttons */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.option-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-align: left;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.option-button:hover {
+  background-color: var(--option-hover);
+}
+
+.option-button.selected {
+  background-color: var(--option-selected);
+  position: relative;
+}
+
+.option-button.selected::after {
+  content: "<-- selected answer button";
+  color: var(--text-secondary);
+  margin-left: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 2rem;
+}
+
+.progress-bar {
+  height: 4px;
+  background-color: var(--border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.next-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.next-button:hover {
+  opacity: 0.9;
+}
+
+.next-button:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
+/* Timer Animation */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.timer-badge.warning {
+  animation: pulse 1s infinite;
+  color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .quiz-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .timer-badge {
+    align-self: flex-end;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+
+  .option-button {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+
+  .option-button.selected::after {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
