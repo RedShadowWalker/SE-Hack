@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeContext.jsx";
-import { useTheme } from "./context/ThemeContext.jsx";
+import { ThemeProvider, useTheme } from "./context/ThemeContext.jsx";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 import Navbar from "./components/Navbar.jsx";
