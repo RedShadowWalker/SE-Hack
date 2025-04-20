@@ -38,10 +38,7 @@ const TeacherNavbar = () => {
           Dashboard
         </NavLink>
 
-        <NavLink to="/teacher/courses" className="nav-link">
-          <FaBook />
-          My Courses
-        </NavLink>
+       
 
         <NavLink to="/teacher/materials" className="nav-link">
           <FaFileAlt />

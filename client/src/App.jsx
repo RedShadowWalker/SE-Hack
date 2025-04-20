@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
 import ContentHub from "./pages/ContentHub.jsx";
 import Assignments from "./pages/Assignments.jsx";
+//import Quizz from "./components/Student/Quizz.jsx";
 
 // Teacher Pages
 import Dashboard from "./teacherpages/Dashboard.jsx";

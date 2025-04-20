@@ -3,7 +3,7 @@ import { ref, onValue } from "firebase/database";
 import db from "../../firebase/firebaseConfig";
 import OngoingQuiz from "./OngoingQuiz";
 
-const Quiz = () => {
+const Quizz = () => {
   const [quizTitles, setQuizTitles] = useState([]);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [score, setScore] = useState(null);
@@ -53,4 +53,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Quizz;
