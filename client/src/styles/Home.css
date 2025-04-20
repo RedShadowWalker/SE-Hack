@@ -52,6 +52,9 @@
   border: 3px solid #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  background-image: url('../assets/ccn.jpg'); /* Replace with the actual path to your image */
+  background-size: cover;
+  background-position: center;
 }
 
 .profile-image:hover {
