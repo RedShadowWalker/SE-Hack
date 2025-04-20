@@ -14,7 +14,13 @@ import {
   Legend,
 } from "chart.js";
 import { Bar, Pie, Line } from "react-chartjs-2";
-import { FaTrophy, FaUserGraduate, FaBell, FaPlay } from "react-icons/fa";
+import {
+  FaTrophy,
+  FaUserGraduate,
+  FaBell,
+  FaPlay,
+  FaPlus,
+} from "react-icons/fa";
 import "../styles/Home.css";
 
 ChartJS.register(
@@ -45,6 +51,8 @@ const Home = () => {
       { id: 3, text: "Quiz scheduled for next week", type: "reminder" },
     ],
   };
+
+  profileData.name = <strong>{profileData.name}</strong>;
 
   const attendanceData = {
     labels: [
@@ -125,26 +133,34 @@ const Home = () => {
   const videoData = [
     {
       id: 1,
-      title: "Introduction to React",
+      title: "React Components Project",
+      course: "Web Development",
       duration: "00:31",
+      thumbnail: "gradient-1",
       url: "https://www.youtube.com/watch?v=example1",
     },
     {
       id: 2,
-      title: "JavaScript Basics",
+      title: "Database Normalization Quiz",
+      course: "Database Management",
       duration: "00:32",
+      thumbnail: "gradient-2",
       url: "https://www.youtube.com/watch?v=example2",
     },
     {
       id: 3,
-      title: "CSS Fundamentals",
+      title: "JavaScript Fundamentals",
+      course: "Web Development",
       duration: "00:33",
+      thumbnail: "gradient-3",
       url: "https://www.youtube.com/watch?v=example3",
     },
     {
       id: 4,
-      title: "Web Development",
+      title: "SQL Basics",
+      course: "Database Management",
       duration: "00:34",
+      thumbnail: "gradient-4",
       url: "https://www.youtube.com/watch?v=example4",
     },
   ];
@@ -200,7 +216,6 @@ const Home = () => {
             <p className="stat-label">Achievements</p>
           </div>
         </div>
-
         <div className="stat-card courses">
           <FaUserGraduate className="stat-icon" />
           <div className="stat-content">
@@ -331,22 +346,29 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* Video Section: Continuous Horizontal Scroll */}
+      <div className="home-header">
+        <h2>Online Classes</h2>
+      </div>
+
+      {/* Video Scroll Grid */}
       <div className="video-scroll-container">
         <div className="video-scroll-track">
           {[...videoData, ...videoData].map((video, index) => (
             <div
               key={index}
-              className="video-card"
+              className={`video-frame ${video.thumbnail}`}
               onClick={() => handleVideoClick(video.url)}
             >
-              <div className="video-thumbnail">
-                <div className="play-button">
+              <div className="video-overlay">
+                <button className="play-button">
                   <FaPlay />
-                </div>
-                <div className="video-duration">{video.duration}</div>
+                </button>
+                <span className="duration">{video.duration}</span>
               </div>
-              <h3>{video.title}</h3>
+              <div className="video-info">
+                <h3>{video.title}</h3>
+                <p>{video.course}</p>
+              </div>
             </div>
           ))}
         </div>

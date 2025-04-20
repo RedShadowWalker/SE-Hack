@@ -23,7 +23,7 @@ const CreateQuiz = () => {
     console.log(questions);
     set(quizRef, { title: quizTitle, questions })
     .then(()=>{
-      alert("Quiz Created!");
+      window.location.reload();
     })
     .catch((error)=>{
       console.log("Error creating quiz: ",error);
@@ -31,7 +31,7 @@ const CreateQuiz = () => {
   };
 
   return (
-    <div>
+    <div className="create-quiz-container"> 
       <h2>Create Quiz</h2>
       <input placeholder="Quiz Title" onChange={(e) => setQuizTitle(e.target.value)} />
       {questions.map((q, i) => (
