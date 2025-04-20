@@ -194,6 +194,7 @@
   color: white;
 }
 
+/* Feature List Styles */
 .feature-list {
   display: grid;
   gap: 1rem;
