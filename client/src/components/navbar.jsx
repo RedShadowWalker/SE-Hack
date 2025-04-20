@@ -37,7 +37,7 @@ const Navbar = () => {
           Assignments
         </Link>
         <Link
-          to="/"
+          to="/quizz"
           className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
         >
           Quiz

@@ -9,7 +9,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyCtbNJag-sELKQ02I2y8Q8WBTjtiEHSOtk",
   authDomain: "se-hack-22f7e.firebaseapp.com",
-  databaseURL: "https://se-hack-22f7e-default-rtdb.firebasedatabase.app",
+  databaseURL: "https://se-hack-22f7e-default-rtdb.asia-southeast1.firebasedatabase.app/",
   projectId: "se-hack-22f7e",
   storageBucket: "se-hack-22f7e.firebasestorage.app",
   messagingSenderId: "995787559993",
