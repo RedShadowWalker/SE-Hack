@@ -58,7 +58,7 @@ import React, { useEffect, useState } from "react";
 import { ref, get } from "firebase/database";
 import db from "../../firebase/firebaseConfig";
 import Question from "./Question";
-import "./OngoingQuiz.css"; // 💡 Add this
+// import "./OngoingQuiz.css"; // 💡 Add this
 
 const OngoingQuiz = ({ quizTitle, onQuizComplete }) => {
   const [questions, setQuestions] = useState([]);

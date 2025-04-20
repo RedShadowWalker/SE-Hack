@@ -349,7 +349,7 @@ const ManageCourses = () => {
                         className="add-item-btn"
                         onClick={() => setShowAddLecture(true)}
                       >
-                        Add Lecture
+                        Add Notes
                       </button>
                     </div>
                     <div className="content-list">
@@ -568,7 +568,7 @@ const ManageCourses = () => {
             </div>
             <form onSubmit={handleAddLecture}>
               <div className="form-group">
-                <label>Lecture Title</label>
+                <label>File Name</label>
                 <input
                   type="text"
                   value={newLecture.title}
@@ -582,10 +582,10 @@ const ManageCourses = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Lecture File (PDF)</label>
+                <label>File Upload</label>
                 <input
                   type="file"
-                  accept=".pdf,.ppt,.pptx,.doc,.docx"
+                  accept=".pdf,.ppt,.pptx,.doc,.docx,.jpg,.jpeg,.png"
                   onChange={(e) =>
                     setNewLecture({
                       ...newLecture,
