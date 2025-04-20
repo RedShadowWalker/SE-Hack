@@ -2,6 +2,8 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { useTheme } from "./context/ThemeContext.jsx";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
 import Navbar from "./components/Navbar.jsx";
 import TeacherNavbar from "./components/teachernavbar.jsx";
 import Home from "./pages/Home.jsx";
@@ -20,7 +22,6 @@ import ManageCourses from "./teacherpages/ManageCourses.jsx";
 import StudyMaterial from "./teacherpages/StudyMaterial.jsx";
 import Assignment from "./teacherpages/Assignment.jsx";
 import Grading from "./teacherpages/Grading.jsx";
-
 import TeacherProfile from "./teacherpages/TeacherProfile.jsx";
 
 import "./styles/global.css";
@@ -76,9 +77,28 @@ function AppContent() {
   return isTeacher ? <TeacherContent /> : <StudentContent />;
 }
 
-function App() {
+// function App() {
+//   return (
+//     <ThemeProvider>
+//       <Routes>
+//         <Route path="/teacher/*" element={<TeacherContent />} />
+//         <Route path="/*" element={<StudentContent />} />
+//       </Routes>
+//     </ThemeProvider>
+//   );
+// }
+
+export default function App() {
   return (
     <ThemeProvider>
+      <header>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </header>
       <Routes>
         <Route path="/teacher/*" element={<TeacherContent />} />
         <Route path="/*" element={<StudentContent />} />
@@ -86,5 +106,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
