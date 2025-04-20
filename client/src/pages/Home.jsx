@@ -14,7 +14,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar, Pie, Line } from "react-chartjs-2";
-import { FaTrophy, FaUserGraduate, FaBell } from "react-icons/fa";
+import { FaTrophy, FaUserGraduate, FaBell, FaPlay } from "react-icons/fa";
 import "../styles/Home.css";
 
 ChartJS.register(
@@ -122,8 +122,39 @@ const Home = () => {
     { name: "Mike Wilson", score: 82, rank: 5, avatar: "⭐" },
   ];
 
+  const videoData = [
+    {
+      id: 1,
+      title: "Introduction to React",
+      duration: "00:31",
+      url: "https://www.youtube.com/watch?v=example1",
+    },
+    {
+      id: 2,
+      title: "JavaScript Basics",
+      duration: "00:32",
+      url: "https://www.youtube.com/watch?v=example2",
+    },
+    {
+      id: 3,
+      title: "CSS Fundamentals",
+      duration: "00:33",
+      url: "https://www.youtube.com/watch?v=example3",
+    },
+    {
+      id: 4,
+      title: "Web Development",
+      duration: "00:34",
+      url: "https://www.youtube.com/watch?v=example4",
+    },
+  ];
+
   const handleCardClick = (cardName) => {
     setExpandedCard(expandedCard === cardName ? null : cardName);
+  };
+
+  const handleVideoClick = (url) => {
+    window.open(url, "_blank");
   };
 
   const cardVariants = {
@@ -300,19 +331,25 @@ const Home = () => {
         </motion.div>
       </div>
 
-      {/* Video Grid Section */}
-      <div className="video-grid">
-        {[1, 2, 3, 4].map((item) => (
-          <div key={item} className="video-card">
-            <div className="video-thumbnail">
-              <div className="play-button">
-                <span>Play Video</span>
+      {/* Video Section: Continuous Horizontal Scroll */}
+      <div className="video-scroll-container">
+        <div className="video-scroll-track">
+          {[...videoData, ...videoData].map((video, index) => (
+            <div
+              key={index}
+              className="video-card"
+              onClick={() => handleVideoClick(video.url)}
+            >
+              <div className="video-thumbnail">
+                <div className="play-button">
+                  <FaPlay />
+                </div>
+                <div className="video-duration">{video.duration}</div>
               </div>
-              <div className="video-duration">00:{30 + item}</div>
+              <h3>{video.title}</h3>
             </div>
-            <h3>Class Title</h3>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </motion.div>
   );
