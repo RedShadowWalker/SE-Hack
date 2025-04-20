@@ -11,7 +11,8 @@ import Quiz from "./pages/Quiz.jsx";
 import Account from "./pages/Account.jsx";
 import ContentHub from "./pages/ContentHub.jsx";
 import Assignments from "./pages/Assignments.jsx";
-//import Quizz from "./components/Student/Quizz.jsx";
+import Quizz from "./components/Student/Quizz.jsx";
+import OngoingQuiz from "./components/Student/OngoingQuiz.jsx";
 
 // Teacher Pages
 import Dashboard from "./teacherpages/Dashboard.jsx";
@@ -57,7 +58,7 @@ function StudentContent() {
           <Route path="/" element={<Home />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/course/:slug" element={<CourseDetail />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quizz" element={<Quizz />} />
           <Route path="/account" element={<Account />} />
           {/* New routes */}
           <Route path="/contenthub" element={<ContentHub />} />
