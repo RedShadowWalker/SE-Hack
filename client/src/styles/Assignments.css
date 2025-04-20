@@ -1,13 +1,13 @@
 /* Assignments.css - Blue theme */
 :root {
-  --primary-blue: #1565C0;
-  --light-blue: #64B5F6;
-  --dark-blue: #0D47A1;
-  --hover-blue: #1E88E5;
-  --bg-blue: #E3F2FD;
+  --primary-blue: #1565c0;
+  --light-blue: #64b5f6;
+  --dark-blue: #0d47a1;
+  --hover-blue: #1e88e5;
+  --bg-blue: #e3f2fd;
   --text-dark: #212121;
-  --text-light: #F5F5F5;
-  --card-bg: #FFFFFF;
+  --text-light: #f5f5f5;
+  --card-bg: #ffffff;
   --card-shadow: 0 4px 12px rgba(13, 71, 161, 0.1);
   --card-hover-shadow: 0 8px 16px rgba(13, 71, 161, 0.2);
   --transition-speed: 0.3s;
@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  font-family: "Segoe UI", "Roboto", sans-serif;
   background-color: var(--bg-blue);
   color: var(--text-dark);
 }
@@ -78,7 +78,7 @@ body {
 }
 
 .section-title::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 50%;
@@ -107,14 +107,15 @@ body {
   padding: 20px;
   width: 170px;
   min-height: 180px;
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
 .subject-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -207,7 +208,8 @@ body {
   padding: 0 30px;
 }
 
-.slider-content, .answer-key-container {
+.slider-content,
+.answer-key-container {
   display: flex;
   gap: 20px;
   overflow-x: auto;
@@ -217,7 +219,8 @@ body {
   scrollbar-width: none;
 }
 
-.slider-content::-webkit-scrollbar, .answer-key-container::-webkit-scrollbar {
+.slider-content::-webkit-scrollbar,
+.answer-key-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -237,7 +240,8 @@ body {
   cursor: pointer;
   z-index: 10;
   color: white;
-  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  transition: background-color var(--transition-speed),
+    transform var(--transition-speed);
 }
 
 .slider-button.left {
@@ -290,7 +294,8 @@ body {
   align-items: center;
   cursor: pointer;
   z-index: 1000;
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  transition: transform var(--transition-speed),
+    box-shadow var(--transition-speed);
 }
 
 .user-avatar:hover {
@@ -303,7 +308,7 @@ body {
   .subject-container {
     justify-content: center;
   }
-  
+
   .main-subjects .subject-card {
     width: 180px;
     min-height: 180px;
@@ -316,46 +321,46 @@ body {
     gap: 10px;
     padding: 15px;
   }
-  
+
   .site-title {
     font-size: 24px;
   }
-  
+
   .subject-card {
     width: 150px;
     min-height: 160px;
     padding: 15px;
   }
-  
+
   .main-subjects .subject-card {
     width: 160px;
     min-height: 160px;
   }
-  
+
   .subject-icon {
     width: 50px;
     height: 50px;
     padding: 8px;
   }
-  
+
   .subject-info h3 {
     font-size: 16px;
   }
-  
+
   .subject-info p {
     font-size: 12px;
   }
-  
+
   .section-title {
     font-size: 20px;
     margin: 20px 0 10px;
   }
-  
+
   .slider-button {
     width: 30px;
     height: 30px;
   }
-  
+
   .user-avatar {
     width: 50px;
     height: 50px;
@@ -368,40 +373,41 @@ body {
   .assignments-container {
     padding: 10px;
   }
-  
+
   .subject-container {
     gap: 10px;
   }
-  
+
   .subject-card {
     width: calc(50% - 15px);
     min-height: 150px;
     padding: 12px;
   }
-  
+
   .main-subjects .subject-card {
     width: calc(50% - 15px);
     min-height: 150px;
   }
-  
-  .slider-content, .answer-key-container {
+
+  .slider-content,
+  .answer-key-container {
     gap: 10px;
     padding: 10px 0;
   }
-  
+
   .slider-button {
     width: 26px;
     height: 26px;
   }
-  
+
   .slider-button.left {
     left: 0;
   }
-  
+
   .slider-button.right {
     right: 0;
   }
-  
+
   .user-avatar {
     width: 40px;
     height: 40px;
