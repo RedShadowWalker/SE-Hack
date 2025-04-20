@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { db } from "../../firebase/firebaseConfig";
+import db from "../../firebase/firebaseConfig";
 import { ref, set } from "firebase/database";
 
 const CreateQuiz = () => {
@@ -19,8 +19,15 @@ const CreateQuiz = () => {
 
   const handleSave = () => {
     const quizRef = ref(db, `quizzes/${quizTitle}`);
-    set(quizRef, { title: quizTitle, questions });
-    alert("Quiz Created!");
+    console.log(quizTitle);
+    console.log(questions);
+    set(quizRef, { title: quizTitle, questions })
+    .then(()=>{
+      alert("Quiz Created!");
+    })
+    .catch((error)=>{
+      console.log("Error creating quiz: ",error);
+    })
   };
 
   return (
